@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>会员中心</title>
+<#assign ctx=request.contextPath>
+ <#include "header_common.html"/> 
+<#import "/macros/header_macro.html" as head>
+<#import "/macros/nav_macro.html" as leadway_nav> 
+<#import "/macros/footer_macro.html" as leadway_footer>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/common.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/address.css">
+<script src="${ctx}/js/jquery.js"></script>
+<script src="${ctx}/js/IE9.js"></script>
+<script src="${ctx}/js/index.js"></script>
+<script type="text/javascript">
+/** 文档加载完 */
+$(function(){
+
+
+});
+</script>
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+</head>
+
+<body><hr>
+
+<@head.header/>
+
+<!-- nav 导航区开始 -->
+<@leadway_nav.nav />
+
+<div class="content">
+  <div class="place">位置：首页→会员中心</div>
+<form action="${ctx}/customer/addUserAddress" method="post" id="addUserAddress">
+ <div class="member">
+ <div class="me_left">
+ <ul>
+ <li>账号管理</li>
+<li><a href="${ctx}/customer/getUserById">个人资料</a></li>
+<li><a href="${ctx}/customer/orderDetails">个人交易信息</a></li>
+<li><a href="${ctx}/customer/getAddressById">收货地址</a></li>
+ </ul>
+ 
+ 
+ </div>
+ <div class="me_right">
+ 
+ 
+ <ul class="data">
+ <li><a href="#"></a></li>
+ <li><a href="#"></a></li>
+ 
+</ul>
+
+ <div class="r_list">收货地址</div>
+ <div class="clear"></div>
+ <div class="r_buttom">
+ <label class="photo"></label>
+ <div class="clear"></div>
+ <label>所在地区</label>
+<input id="city" name="city" type="text" placeholder="点击选择城市" value=""/>
+ <div class="clear"></div>
+ 
+ <label>详细地址</label>
+ <textarea placeholder="建议您如实填写详细收货地址，列如街道民称，
+门牌号码，楼层和房间号等信息" style=" overflow:hidden;" id="addressDetail" name="addressDetail"></textarea>
+
+ <div class="clear"></div>
+
+ <label>邮政编码</label>
+ <input type="text" placeholder="如您不清楚邮编，可填写000000" class="wid" id="mail" name="mail"/>
+  <div class="clear"></div>
+
+ <label>收货人姓名</label>
+ 
+<input type="text" placeholder="长度不超过25个字符" class="wid" id="name" name="name"/>
+  <div class="clear"></div>
+
+ <label>手机号码</label>
+ <select class="f-l">
+ <option>中国大陆+86</option>
+ </select>
+ <input class=" wid f-l" type="text" placeholder="电话号码，手机号码必填一项" id="phone" name="phone"/>
+  <div class="clear"></div>
+ <label>电话号码</label>
+ <select class="f-l">
+ <option>中国大陆+86</option>
+ 
+ </select>
+ <input class="f-l" type="text" placeholder="电话号码" id="tel" name="tel"/>
+
+   <div class="clear"></div>
+   <button id="btn">保存</button>
+</form>
+
+
+<div class="r_add">
+
+<ul>
+<li><span>收货人</span><span>所在地 </span><span>详细地址</span><span>邮编</span><span>手机</span><span>操作</span></li>
+<#if addressList??>
+<#list addressList as list>
+<li><span>${list.name}</span><span>${list.city}</span><span>${list.addressDetail}</span><span>${list.mail}</span><span>${list.phone}</span>
+<span><a href="${ctx}/customer/deleteUserAddress?id=${list.id}">删除</a></span></li>
+</#list>
+</#if>
+</ul>
+
+</div>
+ 
+ </div>
+
+ </div>
+
+  <div class="clear"></div>
+
+ 
+ </div>
+
+
+  </div>
+
+<!-- content -->
+	<@leadway_footer.footer/>
+</body>
+
+</html>

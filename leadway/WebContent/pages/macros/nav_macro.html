@@ -1,0 +1,38 @@
+<!-- 宏文件中的内容是方便重复使用的内容
+	nav 宏的名称，方便其他地方使用
+	ctx 表示参数，可以可以有默认值，不需要按顺序赋值
+ -->
+<#assign ctx=request.contextPath>
+<#macro nav>
+
+	<!-- nav 导航区开始 -->
+	<div class="nav">
+<ul class="nav_nav">
+<li><div class="gib"><div id="oneo"><a href="#">全部商品</a></div>
+<div id="mune" class="pd_navlist" onMouseOut="out2()" onMouseOver="show2()">
+<ul>
+<#if navList??> <#list navList as nav>
+<li><a href="${ctx}/customer/goods/goodsShopping?ID=${nav.code}"><img src="${ctx}/images/3_pro_details_03.png" width="8" height="8"/>${nav.name}</a></li>
+</#list> </#if>
+</ul>
+</div>
+</div>
+</li>
+<li class="mr"><a href="${ctx}/customer/index">首页</a></li>
+<#if typeList??> <#list typeList as type>
+<#if indexName??>
+<#if type.code == indexName.code>
+<li><a href="${ctx}/customer/goods/goodsShopping?ID=${type.code}" style="color:red;">${type.name}</a></li>
+<#else>
+<li><a href="${ctx}/customer/goods/goodsShopping?ID=${type.code}">${type.name}</a></li>
+</#if>
+<#else>
+<li><a href="${ctx}/customer/goods/goodsShopping?ID=${type.code}">${type.name}</a></li>
+</#if>
+</#list> </#if>
+
+</ul>
+
+</div>
+	<!-- nav end 导航区结束-->
+</#macro>

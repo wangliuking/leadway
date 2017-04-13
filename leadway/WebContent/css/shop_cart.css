@@ -1,0 +1,52 @@
+/* CSS Document */
+.content{ width:1200px; height:auto; margin:10px auto 30px;}
+.place{ width:1200px; height:40px; font-family:'微软雅黑'; font-size:14px; color:#555; background:#c9c9c9; line-height:40px; text-align:center;}
+.nav_list{ width:1198px; height:40px; border:1px solid #a0a0a0;}
+.nav_list li{ width:90px; float:left; margin-right:6px; height:40px; text-align:center; line-height:40px;}
+.nav_list li a{ font-family:'微软雅黑'; font-size:14px; color:#555;}
+.nav_list li:hover{ background:#ededed; width:90px; height:40px;}
+.nav_list li a:hover{ color:#d20202;}
+
+.nav_ct{ width:1200px; height:auto;}
+.nav_ct li{ height:166px; border:1px solid #a0a0a0; margin-bottom:30px}
+
+.nav_ct li div{ float:left;}
+.sp1{ width:380px; height:166px; border-right:1px solid #a0a0a0;}
+.nav_title{ width:340px; height:150px; margin:6px auto 0; font-family:'微软雅黑'; font-size:14px; color:#3f3f3f;}
+.nav_title a{ color:#555;}
+.nav_title img{ float:right; margin:0 6px; margin-top:-8px;}
+.sp2{ width:240px; height:166px; font-family:'微软雅黑'; font-size:12px; color:#000; text-align:center; border-right:1px solid #a0a0a0;}
+.butt{
+	float:right;
+	font-size:18px;
+	color:red;
+}
+#amount div{ margin:70px;}
+#amount .number{ width:36px; height:20px; float:left; border:1px solid #959595; text-align:center; }
+.shuz{width:25px; height:20px; border:1px solid #959595; text-align:center; margin-left:2px; }
+/*#amount span{ display:inline-block; width:22px; line-height:20px;  height:20px; border:1px solid #959595; float:left;}*/
+.jia{display:inline-block; width:22px; line-height:20px;  height:20px; border:1px solid #959595; float:left;}
+.jian{display:inline-block; width:22px; line-height:20px;  height:20px; border:1px solid #959595; margin-top:-40px; }
+.sp3{ width:200px;font-family:'微软雅黑'; font-size:18px; color:#3f3f3f; text-align:center; height:166px; line-height:166px; border-right:1px solid #a0a0a0;}
+
+.sp3 a{ display:inline-block; width:80px; border:1px solid #a0a0a0; height:24px; background:#eeeeee; color:#555;}
+.sp3 span{font-size:14px; color:#a8a8a8; }
+.sp4 button{ background:none; font-family:'微软雅黑'; font-size:18px; color:#3f3f3f;}
+.sp4 input{ float:right; margin-top:10px;}
+
+.sp4{ width:198px;font-family:'微软雅黑'; font-size:18px; color:#3f3f3f; text-align:center; height:166px; line-height:166px;}
+.sp4 a{ display:inline-block; line-height:32px; width:112px; border:1px solid #fff; height:32px; color:#555;}
+.sp4 a:hover{ width:112px; border:1px solid #a0a0a0; height:32px; color:#555;}
+
+.pl_but{ width:1200px; height:40px; background:#d5d5d5; line-height:40px;}
+.pl_but a input{ width:90px; height:40px; margin-top:0 !important; color:#fff; font-size:24px; background:#db0000;float:right;}
+
+.pl_but label{ float:left; margin-left:200px;}
+.pl_but label span{font-family:'微软雅黑'; font-size:24px; color:#ca0000; }
+.pl_but input{margin:13px 0 0 20px !important; }
+
+.pl_but input,.pl_but button{ border:0; background:none; margin:10px 20px 10px 0; float:left;}
+
+
+
+

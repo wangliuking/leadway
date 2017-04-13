@@ -1,0 +1,135 @@
+<!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>欢迎登陆</title>
+<#assign ctx=request.contextPath>
+<#include "header_common.html"/>
+<#import "/macros/footer_macro.html" as leadway_footer>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/login.css">
+<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+
+
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+<script type="text/javascript">
+		/** 监听文档加载完事件 */
+		$(function(){
+
+
+			/** 为表单绑定onsubmit提交事件 */
+			$("#loginBtn").click(function(){
+				/** 做表单输入校验 */
+				var userId = $("#userId");
+				var password = $("#password");
+				var code = $("#code");
+				var tips = "";
+				if ($.trim(userId.val()) == ""){
+					tips = "账号不能为空！";
+					userId.focus();// 调用文本框获取焦点方法
+				}else if (!/^\w{5,20}$/.test($.trim(userId.val()))){
+					tips = "账号格式不正确！";
+					userId.focus();// 调用文本框获取焦点方法
+				}else if ($.trim(password.val()) == ""){
+					tips = "密码不能为空！";
+					password.focus();// 调用文本框获取焦点方法
+				}else if (!/^\w{5,20}$/.test($.trim(password.val()))){
+					tips = "密码格式不正确！";
+					password.focus();// 调用文本框获取焦点方法
+				}else if ($.trim(code.val()) == ""){
+					tips = "验证码不能为空！";
+					code.focus();// 调用文本框获取焦点方法
+				}else if (!/^[a-zA-Z0-9]{4}$/.test($.trim(code.val()))){
+					tips = "验证码格式不正确！";
+					code.focus();// 调用文本框获取焦点方法
+				} 
+				/** 判断表单是否通过校验 */
+				if (tips != ""){
+					alert(tips);
+					return false;
+				}else{
+					var params = $("#loginForm").serialize();
+					var url = "${ctx}/customer/loginAjax";
+					$.post(url,params,function(data,status){
+						if(status == "success"){
+							if(data.status == 0){
+								window.location = "${ctx}/customer/index"
+							}else if(data.status == 4){
+								window.location = "${ctx}/admin/mistake"
+							}else{
+								alert(data.tip);
+							}
+						}else{
+							alert("数据加载失败!");	
+						}
+					},"json");
+					
+				}
+			});
+		});
+		
+		var change = function(){
+			$(".checkimg").prop("src", "${ctx}/verify.do?"+Math.random());
+		};
+	</script>
+</head>
+
+
+<body>
+
+<div class="header ">
+<a href="index.html"><img src="${ctx}/images/logo.gif" width="184" height="120" alt="logo" title="logo" class="f-l"/></a>
+<div class="h_title">欢迎登录</div>
+</div>
+
+<div class="content">
+
+<div class="ct_center">
+
+<div class="login">
+<form action="user/login.do" method="post" id="loginForm">
+<div class="reg_t">
+<label>会员登录</label>
+<a href="javascript:void(0)" id="dian"><input type="button" value="立即注册" class="reg"/><img src="${ctx}/images/jiantou_03.png" width="10" height="12" class="img"/></a>
+</div>
+<div class="reg_c">
+<a href="#"><img src="${ctx}/images/er_03.png" width="106" height="94" class="f-r"/></a>
+<p><img src="${ctx}/images/7_login_03.png" width="30" height="33"/><input type="text" id="userId" name="userId" placeholder="请输入用户名" value=""/></p>
+<div><img src="${ctx}/images/7_login_06.png" width="28" height="33"/><input type="password" id="password" name="password" placeholder="请输入密码"  value=""/></div>
+
+<input class="che" type="checkbox"/><label class="automatic">自动登录</label><label class="forget"><a href="#">忘记密码？</a></label>
+<input type="text" id="code" name="vcode" style="width:140px" maxlength="4" placeholder="请输入右侧验证码" class="yanzheng"/>
+<img src="${ctx}/verify.do" id="vimg" class="checkimg" onclick="change();"/>
+<input type="button" id="loginBtn" value="登录" class="denglu">
+
+
+
+</div>
+</form>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<@leadway_footer.footer/>
+</body>
+<script>
+$('#dl').click(function(){
+	window.location.href ="index.html";
+});
+$('#dian').click(function(){
+	window.location.href ="registerPage";
+});
+</script>
+</html>

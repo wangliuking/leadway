@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.leadway.mapper.TimeMapper">
+	<sql id="find">
+		select * from E_TIME_LIMITED
+	</sql>
+	
+	<!-- 获取所有抢购数据 -->
+	<select id="getTimeList" resultMap="timeResultMap">
+		<include refid="find"/>
+		where limit_date > now() order by id asc limit 0,4
+	</select>
+	
+	<!-- 新增抢购数据 -->
+	<insert id="save">
+		insert into E_TIME_LIMITED(
+			LIMIT_DATE,GOODS_ID,IS_END
+		)values(
+			#{limitDate},#{goods.id},#{isEnd}
+		)
+	</insert>
+	
+	<!-- 删除抢购数据-->
+	<delete id="deleteGoodsTime">
+		delete from E_TIME_LIMITED where id=#{id}
+	</delete>
+	
+	<!-- 定义ResultMap -->
+	<resultMap id="timeBaseResultMap" type="Timelimited" autoMapping="true">
+		<!-- 定义列和java对象属性的对应关系 -->
+		<result column="LIMIT_DATE" property="limitDate"/>
+		<result column="IS_END" property="isEnd"/>
+	</resultMap>
+	
+	<resultMap id="timeResultMap" type="Timelimited" extends="timeBaseResultMap">
+		<association property="goods" column="GOODS_ID" javaType="Goods"
+		select="com.leadway.mapper.GoodsMapper.getGoodsById">
+		</association>
+	</resultMap>
+	
+</mapper>

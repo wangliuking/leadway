@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>首页</title> <#assign ctx=request.contextPath> <#include
+"header_common.html"/> <#import "/macros/header_macro.html" as head>
+<#import "/macros/nav_macro.html" as leadway_nav> <#import
+"/macros/footer_macro.html" as leadway_footer>
+<!--条件注释判断浏览器版本-->
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+</head>
+<script src="${ctx}/js/jquery-1.11.3.min.js"></script>
+<!-- 引入自定义的日期插件 -->
+<script type="text/javascript" src="${ctx}/js/jquery-timer-1.0.js"></script>
+<body>
+	<@head.header/>
+
+	<!-- nav 导航区开始 -->
+	<@leadway_nav.nav />
+	<div class="banner" id="banner">
+		<ul class="pic" id="pic">
+			<#if picList??> <#list picList as pic>
+			<li><a href="${ctx}/${pic.requestUrl}"> <img width="1920"
+					height="465" src="${ctx}/${pic.imageUrl}">
+			</a></li> </#list> </#if>
+
+		</ul>
+
+
+		<ul class="num" id="num">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+
+
+
+	</div>
+	<div class="content">
+		<div class="new">
+			<span class="mr-72">新品推荐</span>
+
+			<ul id="lu" class="lu">
+
+				<#if timeList??> 
+				<#list timeList as time>
+				<li><a href="${ctx}/customer/goods/goodsDetail?id=${time.goods.id}"> <img width="281" height="260" src="${ctx}/images/${time.goods.image}"
+						alt="${time.goods.title}"></a>
+						
+						<p>
+						<a href="${ctx}/customer/goods/goodsDetail?id=${time.goods.id}">
+							<#if time.goods.title?length lt 8> ${time.goods.title}
+							<#else> ${time.goods.title[0..8]} </#if>
+						</a>
+						抢码价：¥${time.goods.favorablePrice}【限时疯抢】</p>
+						
+						
+					<div id="aa_${time_index}" style="text-align:center;"></div> <script type="text/javascript">
+						//抢购倒计时操作
+						$("#aa_${time_index}")
+								.downCount(
+										"${time.limitDate?string('yyyy-MM-dd HH:mm:ss')}",
+										"还剩[", "]结束");
+					</script></li> </#list> </#if>
+
+			</ul>
+
+			<div class="new-r" id="new">
+				<img src="${ctx}/images/sale.jpg" width="587" height="410" alt="pic"
+					title="pic" />
+				<div>
+					<a href="pro_details.html">新款促销！厂家特价5折 出售！ 品质见证，放心购买！买 此款还
+						送：方向盘套 擦车毛巾香包 静电 贴 4样礼品！</a>
+				</div>
+				<p>
+					<span>掌柜推荐</span>新款促销！厂家特价5折出售！品质见证，放心购买！<br /> 现买此款还送：方向盘套 擦车毛巾 香包
+					静电贴 4样礼品！<br /> 绝对的划算！亲们注意：座套分大中小尺寸拍前备注车型或联系客服告知一下
+				</p>
+			</div>
+		</div>
+		<div class="hot">
+			<span class="mr-72">热卖产品</span>
+			<div class="left" id="hot">
+				<img src="${ctx}/images/hot.jpg" width="284" height="629"
+					alt="pic" title="pic" />
+			</div>
+
+
+			<ul class="pro">
+				<#if goodsSale??> <#list goodsSale as sale>
+				<li><a href="${ctx}/customer/goods/goodsDetail?id=${sale.id}"><img
+						src="${ctx}/images/${sale.image}" width="281" height="270"
+						alt="pic" title="pic" /></a>
+					<p style="text-align:center;"><a href="${ctx}/customer/goods/goodsDetail?id=${sale.id}">${sale.title[0..8]}</a> <font color="red">正在热卖中！！！</font></p>
+				</li>
+				</#list> </#if>
+			</ul>
+
+
+		</div>
+		<div class="summer">
+			<span class="mr-72">夏日必备</span>
+			<ul id="ul">
+				<#if goodsSummer??> <#list goodsSummer as summer>
+				<li><a href="${ctx}/customer/goods/goodsDetail?id=${summer.id}"><img
+						src="${ctx}/images/${summer.image}" width="587" height="290"
+						alt="pic" title="pic" /></a>
+
+					<div>
+						<a href="${ctx}/customer/goods/goodsDetail?id=${summer.id}"> ${summer.title}<span>点击购买</span>
+						</a>
+					</div></li>
+					</#list> </#if>
+			</ul>
+
+
+		</div>
+	</div>
+	<!-- content -->
+	<@leadway_footer.footer/>
+</body>
+
+<script src="${ctx}/js/banner.js"></script>
+<script src="${ctx}/js/index.js"></script>
+
+</html>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.leadway.mapper.UserMapper">
+	<sql id="findUser">
+		select * from e_user 
+	</sql>
+	<!-- 分页sql基本代码 -->
+	<sql id="pageSql">
+		from e_user
+		<if test="user != null">
+			<where>
+				<if test="user.userId != null &amp;&amp; user.userId != ''">
+					user_id like concat('%',#{user.userId},'%')
+				</if>
+			</where>
+		</if>
+		order by id asc 
+	</sql>
+	<!-- 具体的分页语句 -->
+	<select id="getUserListByPage" resultMap="userBaseResultMap">
+		<trim prefix="select * " suffix="limit">
+			<include refid="pageSql"/>
+		</trim>
+		#{pageModel.startRow},#{pageModel.pageSize}
+	</select>
+	<!-- 统计需要分页的行数 -->
+	<select id="count" resultType="int">
+		select count(*) <include refid="pageSql"/>
+	</select>
+	
+	<!-- 根据用户名和密码查询用户 -->
+	<select id="getUserByUserIdAndByPassword" resultMap="userBaseResultMap">
+			<include refid="findUser"/>
+			<where>
+				user_id = #{userId} and pass_word = #{password}
+			</where>
+	</select>
+	
+	<!-- 根据用户编号查询用户数据 -->
+	<select id="getUserById" resultMap="userBaseResultMap">
+			<include refid="findUser"/>
+			<where>
+				id = #{id}
+			</where>
+	</select>
+	
+	<!-- 判断用户名是否重复 -->
+	<select id="getUserByUserId" resultType="int">
+			select count(*) from e_user where user_id = #{userId}
+	</select>
+	
+	<!-- 查询管理员 -->
+	<select id="getAdmin" resultMap="userBaseResultMap">
+			<include refid="findUser"/>
+			<where>
+				user_id = #{userId} and pass_word = #{password} and role = #{role}
+			</where>
+	</select>
+	
+	<insert id="save">
+		insert into e_user(
+			USER_ID,PASS_WORD,NAME,CITY,
+			SEX,BIRTHDAY,EMAIL,PHONE,ADDRESS,CREATE_DATE,ACTIVE_CODE) 
+		values
+		(#{userId},#{password},#{realname},#{city},#{sex},
+		 #{birthday},#{email},#{phone},#{address},#{createDate},#{activeCode}
+		)
+	</insert>
+	<!-- 用户帐号激活 -->
+	<update id="activeUser">
+		update e_user set active_status=1 where user_id=#{userId} and active_code=#{activeCode}
+	</update>
+	
+	<!-- 用户更新 -->
+	<update id="updateUser">
+		update e_user set name=#{realname}, role=#{role},city=#{city},
+		phone=#{phone},email=#{email},address=#{address},birthday=#{birthday} where id=#{id}
+	</update>
+	
+	<!-- 用户帐号删除操作-->
+	<delete id="deleteUser">
+		delete from e_user where id=#{id}
+	</delete>
+	
+	<!-- 定义ResultMap -->
+	<resultMap id="userBaseResultMap" type="User" autoMapping="true">
+		<!-- 定义列和java对象属性的对应关系 -->
+		<result column="user_id" property="userId"/>
+		<result column="pass_word" property="password"/>
+		<result column="create_Date" property="createDate"/>
+		<result column="active_Status" property="activeStatus"/>
+		<result column="active_Code" property="activeCode"/>
+		<result column="name" property="realname"/>
+		<result column="city" property="city"/>
+		<result column="sex" property="sex"/>
+		<result column="birthday" property="birthday"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="address" property="address"/>
+	</resultMap>
+</mapper>

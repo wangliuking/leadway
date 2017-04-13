@@ -1,0 +1,36 @@
+
+/* CSS Document */
+.content{ width:1200px; height:auto; margin:10px auto 30px;font-family:'黑体';}
+.payment{ width:1200px; height:27s0px;}
+
+.payment p{ float:left; margin-top:60px; margin-left:20px; font-size:14px; line-height:26px; color:#424242;}
+
+.yuan{ float:right; margin:60px 60px 0 0; font-size:30px;color:#be0000;}
+.yuan span{font-size:14px; color:#424242;}
+.payment a{ float:right; display:inline-block; width:160px; height:40px; line-height:40px; margin-right:30px; border:1px solid #ff0000; text-align:center; font-size:18px; color:#4d4d4d;}
+
+.content ul{ width:1200px; font-size:18px;}
+
+
+.content ul li{ height:70px; line-height:70px; border-top:1px solid #ff0000; padding-left:60px; list-style:url(../images/9_confirm_order_06.png) inside; }
+
+/* .content ul li:nth-child(1){ background:#ececec; list-style:url(../images/9_confirm_order_03.png) inside;} */
+.select{ background:#ececec; list-style:url(../images/9_confirm_order_03.png) inside !important;}
+.content ul li:nth-child(1) span{ margin-left:388px; width:90px;}
+.content ul li span{ display:inline-block; width:200px; height:76px; margin-right:30px;}
+.content ul li:nth-child(1) span big{ font-size:18px; color:#e90000;}
+
+
+.bashi{ font-size:18px; color:#be0000; !important;}
+.quick{ width:196px; line-height:36px; text-align:center; height:36px; border:1px dashed #959595; margin-left:30px;}
+.quick a{ color:#db0000; font-size:18px;}
+.but{ width:106px; height:36px; border-radius:3px; background:#ff0000; margin-left:60px; margin-top:20px; color:#fff; font-size:18px;}
+
+
+
+
+
+
+
+
+

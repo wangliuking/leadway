@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css"
+	href="${ctx}/css/bootstrap-responsive.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/css/admin-right.css" />
+<script type="text/javascript" src="${ctx}/js/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery-migrate-1.2.1.js"></script>
+
+<script src="${ctx}/js/artDialog-6.0.2/dist/dialog-min.js"></script>
+<link rel="stylesheet"
+	href="${ctx}/js/artDialog-6.0.2/css/ui-dialog.css">
+<script type="text/javascript">
+     function deletes(id){
+    		var d = dialog({
+				title: '温馨提示',
+			    content: '<img src=${ctx}/images/logo.gif><br><font size=6 color=red>您确定要删除对应的数据吗?</font>',
+			    okValue:'确定',
+			    ok:function(){
+			    	this.title("请稍等...");
+			    	window.location="${ctx}/admin/goods/delete?id="+id;
+			    	return false;
+			    },
+			    cancelValue:'取消',
+			    cancel:function(){}
+			});
+			d.showModal();
+    	}
+     
+     //添加商品请求
+     $(function(){
+    	$("#addnew").click(function(){
+    		window.location="${ctx}/admin/goods/toAddGoods";
+    	}); 
+     });
+     
+     </script>
+</head>
+<body>
+
+	
+	
+<form class="form-inline definewidth m20" action="${ctx}/admin/goods/goodsList" method="post">
+		 商品标题：<input type="text" name="title" cssStyle="width:155px;" class="abc input-default" placeholder="请输入需要查询的商品标题" value=""/>				
+		 商品类型：<select name="goodsType.code" class="width:165px;">
+			<option>请选择商品类型</option> <#list goodstypeList as g>
+			<option value="${g.code}">${g.name}</option> </#list>
+		</select> &nbsp;&nbsp;
+		
+		<button type="submit" class="btn btn-primary">查询</button>
+		&nbsp;&nbsp;
+		<button type="button" class="btn btn-success" id="addnew">添加</button>
+	</form>
+
+	<table class="table table-bordered table-hover definewidth m10">
+		<thead>
+			<tr>
+				<th>商品编号</th>
+				<th>商品名称</th>
+				<th>品牌名称</th>
+				<th>价格</th>
+				<th>优惠价</th>
+				<th>上架日期</th>
+				<th>库存</th>
+				<th>商品封面</th>
+				<th>商品描述</th>
+				<th>颜色</th>
+				<th>服务类型</th>
+				<th>其他</th>
+				<th>商品类型</th>
+				<th>创建日期</th>
+				<th>图片1</th>
+				<th>图片2</th>
+				<th>图片3</th>
+				<th>详情图片</th>
+				<th colspan="2" style="text-align: center">操作</th>
+			</tr>
+		</thead>
+		<#if goodsList??> <#list goodsList as goods>
+		<tr>
+			<td>${goods.id}</td>
+			<td>${goods.title}</td>
+			<td>${goods.brandName}</td>
+			<td>${goods.price}</td>
+			<td>${goods.favorablePrice}</td>
+			<td>${goods.groundingDate?string("yyyy-MM-dd")}</td>
+			<td>${goods.storage}</td>
+			<td><img style="width:49px; height:49px;" src="${ctx}/images/${goods.image}" /></td>
+			<td>${goods.description}</td>
+			<td>${goods.color}</td>
+			<td>${goods.service}</td>
+			<td>${goods.other}</td>
+			<td>${goods.goodsType.name}</td>
+			<td>${goods.createDate?string("yyyy-MM-dd")}</td>
+			<td><img src="${ctx}/images/${goods.img1}" style="width:78px; height:78px;"/></td>
+			<td><img src="${ctx}/images/${goods.img2}" style="width:78px; height:78px;"/></td>
+			<td><img src="${ctx}/images/${goods.img3}" style="width:78px; height:78px;"/></td>
+			<td><img src="${ctx}/images/${goods.imgDetail}" style="width:146px; height:164px;"/></td>
+			<td><a href="${ctx}/admin/goods/showUpdate?id=${goods.id}">修改</a>
+			</td>
+			<td><a href="javascript:;" onclick="deletes(${goods.id})">删除</a>
+			</td>
+		</tr>
+		</#list> </#if>
+	</table>
+
+<#if pageModel.recordCount??>
+<!-- 分页标签-->
+	<div id="pagerInfo"
+		style="margin: 5px 0px; text-align: center; background-color: #FFFF00; color: blue">
+		共${pageModel.recordCount}条,
+		分${((pageModel.recordCount+pageModel.pageSize
+		-1)/pageModel.pageSize)?int}页</div>
+	<div id="pager"><#import "../common/pager.html" as page>
+		<@page.pager pageIndex=pageModel.pageIndex pageSize=pageModel.pageSize
+		recordCount=pageModel.recordCount		
+		toURL="${ctx}/admin/goods/goodsList"/>
+		</div>
+	</#if>	
+</body>
+</html>

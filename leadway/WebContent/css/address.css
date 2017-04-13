@@ -1,0 +1,56 @@
+/* CSS Document */
+.content{ width:1200px; height:auto; margin:10px auto 30px;font-family:'微软雅黑';color:#4d4d4d;}
+.place{ width:1200px; height:40px;  font-size:14px; color:#555; background:#c9c9c9; line-height:40px; text-align:center;}
+.member{ width:1198px; height:910px; border:1px solid #959595; margin-top:10px;}
+.me_left{ float:left; width:180px; height:910px; border-right:1px solid #959595; background:#eeeeee;}
+.me_left ul{ width:1016px;}
+.me_left ul li{ font-size:24px; color:#4d4d4d; text-align:left; padding-left:46px; height:40px; line-height:40px;}
+.me_left ul li:nth-child(1){ margin-bottom:10px; font-weight:bold;}
+
+.me_left ul li a{ font-size:18px; color:#4d4d4d;}
+
+.me_right{ float:left; width:1016px; height:640px;}
+.r_list{ width:142px; height:40px; border:1px solid #959595; background:#fff; border-bottom:none; margin:-84px 0 0 30px; text-align:center; line-height:40px;font-size:18px;  font-weight:bold;}
+.r_buttom{ margin-top:20px; font-size:18px;}
+.r_buttom span{ font-size:12px; color:#8e8e8e;}
+
+.r_buttom img{ margin-bottom:20px;}
+
+.data{ width:1016px; height:42px; border:1px solid #959595; margin-top:60px; line-height:42px;}
+.data li{ float:left; margin-left:66px; font-size:18px;}
+.data li a{ color:#4d4d4d;}
+.me_right label{ width:100px; height:30px; margin-bottom:26px; font-size:18px; line-height:30px; line-height:40px; text-align:left; float:left; padding-left:20px;}
+.me_right input{ float:left;  border:1px solid #959595; height:30px; line-height:30px; margin:0 10px; text-indent:6px; }
+.che{margin-left:200px !important; width:14px; height:14px; border:none !important;}
+.radio{ float:none !important; width:0 !important; }
+.me_right select{ height:30px; line-height:30px; width:105px;}
+.me_right button{ width:76px; height:30px; border:1px solid #959595; background:#d10007; color:#fff; font-size:18px; text-align:center; line-height:30px; margin-left:200px;}
+.fir{ width:90px !important;}
+.two{ width:233px !important;}
+.wid{ width:190px !important;}
+
+.photo{ width:1016px !important;}
+
+.me_right textarea{ width:260px; height:100px; border:1px solid #959595; resize:none; margin-bottom:20px; text-indent:6px; padding-top:6px;}
+
+
+.r_add{ height:260px; width:980px;margin:20px auto; }
+
+.r_add span{font-size:18px; color:#d53535;}
+.r_add ul{ border:1px solid #d9d9d9; }
+.r_add ul li{ height:30px; border-bottom:1px solid #d9d9d9;}
+.r_add ul li:nth-child(1){ line-height:30px;}
+.r_add ul li span{ font-size:12px; color:#424141; width:120px; display:inline-block; margin-right:20px; margin-left:20px; margin-top:-8px;}
+.r_add ul li span:nth-child(2){ line-height:15px;}
+.r_add ul li span button{ border:none; background:none; color:#424141; font-size:12px; margin-left:0; text-align:left;}
+.r_add ul li span a{ color:#424141;}
+.xia{ display:block; position:relative; top:8px;}
+
+
+
+
+
+
+
+
+

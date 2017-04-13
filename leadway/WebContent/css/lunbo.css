@@ -1,0 +1,17 @@
+/* CSS Document */
+.lunbo{ width:1000px; height:auto; border:1px solid #CCC; margin:0 auto;position:relative;}
+.rollBox{width:840px;overflow:hidden;margin:0 auto; border:1px solid #CCC; }
+.rollBox .Cont{width:840px;overflow:hidden;margin:0 auto;padding-top:20px;}
+.rollBox .ScrCont{width:10000000px;}
+.rollBox .Cont .pic1{width:130px;float:left;text-align:center;padding-right:20px;}
+*+html .rollBox .Cont .pic1{width:130px;float:left;text-align:center;padding-right:30px;}
+.rollBox .Cont .pic1 img{padding:4px;background:#fff;border:1px solid #ccc;display:block;margin:0 auto;}
+.rollBox .Cont .pic1 p{line-height:26px;color:#505050;}
+.rollBox .Cont a:link,.rollBox .Cont a:visited{color:333333;text-decoration:none;}
+.rollBox .Cont a:hover{color:#f00;text-decoration:underline;}
+.rollBox #List1,.rollBox #List2{float:left;}
+.rollBox .pic1 a{ margin-top:10px;}
+.left{position:absolute; top:80px; left:15px;}
+.right{ position:absolute; top:80px; left:950px;}
+
+

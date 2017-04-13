@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 配置信息 -->
+<configuration>
+	<typeAliases>
+		<!-- 给数据传输类起一个别名 (type:数据传输类 alias:别名) -->
+		<typeAlias type="com.leadway.dto.User" alias="User" />
+		<typeAlias type="com.leadway.dto.GoodsType" alias="GoodsType" />
+		<typeAlias type="com.leadway.dto.Goods" alias="Goods" />
+		<typeAlias type="com.leadway.dto.Picturcarousel" alias="Pic" />
+		<typeAlias type="com.leadway.dto.Timelimited" alias="Timelimited" />
+		<typeAlias type="com.leadway.dto.Order" alias="Order" />
+		<typeAlias type="com.leadway.dto.OrderItem" alias="OrderItem" />
+		<typeAlias type="com.leadway.dto.Address" alias="Address" />
+	</typeAliases>
+
+	<!-- 配置MyBatis3的环境 -->
+	<environments default="env">
+		<!-- 配置一个环境 -->
+		<environment id="env">
+			<!-- 配置事务管理器 JDBC(有事务)、MANAGED(托管) -->
+			<transactionManager type="JDBC" />
+			<!-- 配置数据源 JNDI(web服务器方式定义数据源)、POOLED(自带连接池)、UNPOOLED(不带连接池) -->
+			<dataSource type="POOLED">
+				<!-- 连接数据库驱动 -->
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<!-- 连接数据库URL -->
+				<property name="url" value="jdbc:mysql:///leadway" />
+				<!-- 连接数据库用户名 -->
+				<property name="username" value="root" />
+				<!-- 连接数据库密码 -->
+				<property name="password" value="root" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- 配置xxxMapper.xml文件 -->
+	<mappers>
+		<mapper resource="com/leadway/mapper/UserMapper.xml" />
+		<mapper resource="com/leadway/mapper/GoodsTypeMapper.xml" />
+		<mapper resource="com/leadway/mapper/GoodsMapper.xml" />
+		<mapper resource="com/leadway/mapper/PicMapper.xml" />
+		<mapper resource="com/leadway/mapper/TimeMapper.xml" />
+		<mapper resource="com/leadway/mapper/OrderMapper.xml" />
+		<mapper resource="com/leadway/mapper/OrderItemMapper.xml" />
+		<mapper resource="com/leadway/mapper/AddressMapper.xml" />
+	</mappers>
+
+
+
+</configuration>

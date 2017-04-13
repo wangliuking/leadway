@@ -1,0 +1,25 @@
+/* CSS Document */
+.fr-re font strong{
+	display: none;
+}
+.submit{margin-left:60px;}
+.checkimg{margin:12px 0px 0px 18px;}
+.content{ width:1200px; height:760px; margin:0 auto;} 
+.Wdate{margin-top:16px;}
+.agree{width:1px;height:1px;margin-left:70px;margin-buttom:20px;}
+.province,.city{margin-top:12px;}
+.c-c40001,.c-c40000{line-height:13px;}
+.man,.women{width:40px;height:40px;float:left;  overflow:hidden; }
+.nan,.nv{width:60px; height:40px;}
+form{ width:356px; height:480px; margin:0 auto; margin-bottom:80px;}
+form label{ padding-right:8px; float:left; overflow:hidden;width:72px; height:42px; margin:10px 0; line-height:32px; text-align:right; font-family:'黑体'; font-size:18px; color:#5c5c5c}
+form input{ float:left;  overflow:hidden; font-family:'黑体'; font-size:14px; color:#5c5c5c; text-indent:0.5em; width:270px; height:40px; line-height:40px; border:1px solid #959595; margin:2px 0;}
+
+.code{ width:134px !important; height:40px; }
+.but{ width:100px; height:40px; background:#f11717;font-size:18px; margin-left:36px; color:#fff; line-height:40px; text-align:center;}
+
+.protocol{ width:120px; height:40px; float:left;  overflow:hidden; padding-left:70px;}
+
+
+.che{ width:14px; height:14px; margin-top:22px;}
+.butt{ width:100px; height:36px; line-height:36px; border:1px solid #959595; border-radius:6px;font-family:'黑体'; font-size:18px; background:#d10007; color:#fff; margin:0 140px; cursor:pointer;}

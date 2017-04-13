@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>购物车</title>
+<#assign ctx=request.contextPath>
+ <#include "header_common.html"/> 
+<#import "/macros/header_macro.html" as head>
+<#import "/macros/nav_macro.html" as leadway_nav> 
+<#import "/macros/footer_macro.html" as leadway_footer>
+<link rel="stylesheet" href="${ctx}/js/artDialog-6.0.2/css/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/common.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/shop_cart.css">
+<script src="${ctx}/js/IE9.js"></script>
+<script src="${ctx}/js/jquery.js"></script>
+<script src="${ctx}/js/artDialog-6.0.2/dist/dialog-min.js"></script>
+
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+</head>
+
+
+<body>
+<@head.header/>
+
+<!-- nav 导航区开始 -->
+<@leadway_nav.nav />
+
+<div class="content">
+  <div class="place">位置：会员中心→购物车</div>
+  <form action="#" method="post">
+  <ul class="nav_ct">
+<#if totalMoney gt 0>
+<#list goodsList as goods>
+    <li id="goods_${goods.id}">
+    <input type="checkbox" checked="checked" id="box_${goods.id}" value="${goods.id}"/>
+    <a href="${ctx}/customer/goods/goodsDetail?id=${goods.id}"><img src="${ctx}/images/${goods.image}" width="167" height="167" class="f-l" /></a>
+      <div class="sp1">
+        <p class="nav_title"><a href="${ctx}/customer/goods/goodsDetail?id=${goods.id}">${goods.title[0..8]}<br/>
+        <td>¥ 原价<span>${goods.price}</span>|<span>优惠价 ${goods.favorablePrice}</span>
+		<input type="hidden" value="${goods.favorablePrice?c}" id="price_${goods.id}"/>
+		</td>
+          <br/>
+          <br/>
+          <br/>
+          ${goods.color}<br/>
+           尺寸：<#if session_size??>${session_size}</#if><br/>
+          </a><a href="#"><img src="${ctx}/images/4_pur_history_06.png" width="27" height="26"/></a><a href="#"><img src="${ctx}/images/4_pur_history_08.png" width="27" height="26"/></a><a href="#"><img src="${ctx}/images/4_pur_history_10.png" width="26" height="26"/></a></p>
+      </div>
+      <div class="sp2">
+      <div class="amount" id="amount"><!--数量选择-->
+		 	
+				<div>
+				 <span><a class="jia" id="jia" href="javascript:void(0)" onclick="updateCar(2,${goods.id})"><img src="${ctx}/images/8_shop_cart_03.png" width="11" height="11"/></a></span>
+				<input class="shuz" id="num_${goods.id}" type="text" value="${goods.buyNum}" size="2" onblur="numChange(${goods.id})"/>
+				 <span><a class="jian" id="jian" href="javascript:void(0)" onclick="updateCar(1,${goods.id})"><img src="${ctx}/images/8_shop_cart_06.png" width="11" height="11"/></a></span>
+				</div>
+			<div class="clear"></div>
+</div>
+</div>
+      <div class="sp3"><td>¥ <span id="total_${goods.id}">${goods.buyMoney}</span></td></div>
+      <div class="sp4"><input type="button" onclick="deleteCar(${goods.id})" value="删除"/></div>
+    </li>
+</#list>
+
+<#else>
+<li>
+<tr>
+<td colspan="7" style="height:300px"><p style="font-size:14px;">您的购物车还是空的，赶紧行动吧！</p>
+<a  style="font-size:13px;" href="${ctx}/">去购物  &gt;
+<img src="${ctx}/images/gwc.png" style="width:50px;height:50px;"></a></td>
+</tr>
+</li>
+</#if>
+  </ul>
+<div class="pl_but">
+
+<input type="checkbox" checked="checked" id="checkAll"/>
+<button>全选</button>
+<label>已选商品<span class="right" id="total_num"></span></label>
+<label>合计(含邮费)：<span class="right" id="total_price">¥ ${totalMoney} 元</span></label>
+
+
+</div>
+ </form>
+ <#if totalMoney gt 0>
+			<form id="subimtOrderForm" action="${ctx}/customer/submitOrder" method="post">
+				<input type="hidden" name="goodsIdArrays" id="goodsIdArrays">
+				<label><input class="butt" type="button" id="submitOrderBtn" value="点击结算"/></label>
+			</form>
+		    </#if>
+  </div>
+  
+<!-- content -->
+	<@leadway_footer.footer/>
+</body>
+
+<script src="${ctx}/js/index.js"></script>
+<script type="text/javascript">
+		
+		/** 文档加载完 */
+		$(function(){
+			
+			/** 获取全选复选框为它绑定点击事件 */
+			$("#checkAll").click(function(){
+				/** 获取下面所有的checkbox,当全选选中时下面的全部选中,
+					当全选没有选中时,下面不需要选中 */
+				/** 查询所有的input元素它的类型为checkbox并且id属性值以box_开头 */
+				$("input[type='checkbox'][id^='box_']").prop("checked", this.checked);
+				/** 计算商品的总金额 */
+				calcPrice();
+			});
+
+			/** 如果全选复选框没有选中的话，让它选中 */
+			if (!$("#checkAll").prop("checked")){
+				$("#checkAll").trigger("click");
+			}else{
+				/** 计算商品的总金额 */
+				calcPrice();
+			}
+
+			/** 获取下面的checkbox为它们绑定点击事件 */
+			var boxs = $("input[type='checkbox'][id^='box_']");
+			boxs.click(function(){
+				
+				/** 让全选选中 */
+				$("#checkAll").prop("checked", boxs.length == boxs.filter(":checked").length);
+				/** 计算商品的总金额 */
+				calcPrice();
+				
+			});
+
+			
+
+			/** 获取反选复选框为它绑定点击事件 */
+			$("#uncheck").click(function(){
+				/** 迭代下面所有的checkbox */
+				boxs.each(function(){
+					/** 让自己取选自己的checked属性值 */
+					$(this).prop("checked", !this.checked);
+				});
+			
+				/** 让全选选中 */
+				$("#checkAll").prop("checked", boxs.length == boxs.filter(":checked").length);
+				/** 计算商品的总金额 */
+				calcPrice();
+			});
+			
+			//提交订单js
+			$("#submitOrderBtn").click(function(){
+				var boxs = $("input[id^='box_']:checked");
+				if(boxs.length == 0){
+					var d = dialog({
+						title: '温馨提示',
+					    content: '<font size=6 color=red>请选择需要提交的商品!</font>'
+					});
+					d.show();
+					setTimeout(function () {
+					    d.close().remove();
+					}, 1000);
+				}else{
+					//获取选中的复选框的值（值是商品id）
+					var ids = boxs.map(function(i,item){
+						return item.value;
+					});
+					$("#goodsIdArrays").val(ids.get());
+					$("#subimtOrderForm").submit();
+				}
+			});
+		});
+
+		/** 定义计算商品总金额的函数 */
+		var calcPrice = function(){
+			/** 获取下面所有选中的checkbox */
+			var boxs = $("input[type='checkbox'][id^='box_']:checked");
+			/** 定义总金额 */
+			var total_price = 0;
+			/** 定义总数量 */
+			var total_num = 0;
+			/** 如果有选中的，就计算 */
+			if (boxs.length > 0){
+				/** 迭代所有选中的checkbox */
+				boxs.each(function(){
+					/** 获取价格 */
+					var price = parseFloat($(this.id.replace("box", "#price")).val());
+					/** 获取数量 */
+					var num = parseInt($(this.id.replace("box", "#num")).val());
+					/*设置选中商品数量*/
+					total_num += num;
+					/* 设置小计金额 **/
+					total_price +=  parseFloat((price * num));
+				});
+				//alert(total_num);
+				/** 设置显示总数量 */
+				$("#total_num").html(total_num +" 件");
+				/** 设置显示总金额 */
+				$("#total_price").html("¥ "+ total_price +" 元");
+			}else{
+				$("#total_num").html(" 0件");
+				/** 设置显示总金额 */
+				$("#total_price").html("¥ 0.00 元");
+			}
+		};
+		
+		//商品的数量更新（保存到session中的购物车中）
+		var updateCar = function(type,goodsId){
+			/*
+			 type 表示操作  1 表示 减少商品数量  2 表示增加商品数量
+			 goodsId 表示需要操作的商品，并且通过这个goodsId可以获取页面元素
+			*/
+			var buyNum = parseInt($("#num_"+goodsId).val());
+			if(type ==1){
+				//减少商品数量操作
+				if(buyNum == 1){
+					var d = dialog({
+						title: '温馨提示',
+					    content: '<font size=6 color=red>商品数量不能为0!</font>'
+					});
+					d.show();
+					setTimeout(function () {
+					    d.close().remove();
+					}, 1000);
+					return;
+				}
+				buyNum -=1;
+			}else{
+				//增加商品数量操作
+				buyNum +=1;
+			}
+			var url ="${ctx}/customer/updateCar";
+			var params = {"goodsId":goodsId,"buyNum":buyNum};
+			$.post(url,params,function(data){
+				if(data.status == 0){
+					//更新商品数量显示框
+					$("#num_"+goodsId).val(buyNum);
+					//让商品数量显示框闪动提醒一下
+					$("#num_"+goodsId).fadeOut(100).fadeIn(100);
+					//更新购物车数量显示(页面元素在header_macro.html)
+					$("#totalNum").text(data.totalNum);
+					//计算小计
+					numChange(goodsId);
+					//重新计算商品总价
+					calcPrice();
+				}else{
+					alert("添加失败");
+				}
+		   },"json");
+		}
+		
+		//删除购物车中的商品
+		function deleteCar(goodsId){
+			var url ="${ctx}/customer/deleteCar";
+			var params = {"goodsId":goodsId};
+			$.post(url,params,function(data){
+				if(data.status == 0){
+					$("#goods_"+goodsId).fadeToggle(500,function(){
+						this.remove();
+						//更新购物车数量显示(页面元素在header_macro.html)
+						$("#totalNum").text(data.totalNum);
+						//重新计算商品总价
+						calcPrice();
+					});
+				}else{
+					alert("添加失败");
+				}
+		   },"json");
+		}
+		
+		/** 购买数据文本框改变的时候计算小计 */
+		var numChange = function(goodsId){
+			/** 获取购买数量 */
+			var num = $("#num_"+goodsId).val();
+			/** 对购买数量做判断 */
+			if (!/^\d+$/.test(num) || num < 1){
+				$("#num_"+goodsId).val(1);
+				num = 1;
+			}
+			/** 获取单价 */
+			var price = parseFloat($("#price_"+goodsId).val());
+			/** 设置小计 */
+			$("#total_"+goodsId).html(num * price);
+			/** 计算商品的总金额 */
+			calcPrice();
+		}
+	</script>
+
+</html>

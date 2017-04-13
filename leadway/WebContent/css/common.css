@@ -1,0 +1,96 @@
+/* CSS Document */
+*{ margin:0; padding:0;}
+a{ text-decoration:none;}
+a:link{ text-decoration:none;}
+a:visited{text-decoration:none;}
+a:hover{text-decoration:none;}
+a:active{text-decoration:none;}
+a,img{border:0;}
+input,textarea{ outline:medium;}  /*清除表单点击后的蓝色框*/
+body,div,ul,li,ol,dl,dt,dd,form,input,h1,h2,h3,h4,label,button,textarea,img{ padding:0; margin:0; font-size:12px; font-family:"微软雅黑"; color:#555; border:0; }
+body a{outline:none;blr:expression(this.onFocus=this.blur());}  /*清除a标签点击时出现的虚线框 （主要是在ie6-ie8）*/
+
+ul,li{list-style:none;}
+
+body{ background:#fff;}
+
+
+.clear{ height:0px; overflow:hidden; clear:both;}
+.test{ border:solid #F00 1px;}
+#test{border:solid #F00 1px; }
+.f-l{ float:left;}
+.f-r{ float:right;}
+.m-6{ margin-top:6px;}
+
+.h_title{ width:240px; height:30px; margin:0 auto; font-family:'黑体'; font-size:30px; color:#424242; line-height:120px;}
+
+.place{ width:1200px; height:40px; font-family:'微软雅黑'; font-size:14px; color:#555; background:#c9c9c9; line-height:40px; text-align:center;}
+
+
+
+/*----------------------------------domain-------------------------------------*/
+.domain{ width:100%; height:40px; background:#e4e2e2;}
+
+.domain div{ width:1200px; height:40px; margin:0 auto; font-size:12px; ; line-height:40px;}
+.domain div span{ float:left; color:#535151; font-family:'微软雅黑';}
+.domain div a{ float:right; color:#424242;font-family:'黑体'; text-decoration:none; margin-left:4px;}
+.domain div a:hover{color:#c20000;}
+
+
+
+/*----------------------------------header-------------------------------------*/
+.header{ width:1200px; height:120px; margin:0 auto;}
+
+.search{ width:300px; height:42px; margin-right:152px; margin-top:40px; border:1px solid #000;}
+.search input{ height:42px; width:236px; line-height:42px; font-size:14px; background:#d8d8d8; padding-left:10px;}
+.search button{ width:54px; height:42px; background:#9c9c9c; float:right;font:18px '黑体'; }
+
+/*----------------------------------nav-------------------------------------*/
+.nav{ width:100%; height:40px; background:#8a8a8a;}
+.nav_nav{ width:1200px; height:40px; margin:0 auto; }
+.nav_nav li{ float:left;  text-align:center; margin-left:40px ;font:18px '黑体'; }
+
+.nav_nav li a{width:100px; display:block;  line-height:40px; color:#ccc; text-decoration:none;}
+.nav_nav li:hover{ background:#fff; }
+.nav_nav li a:hover{ text-decoration:none;}
+.gib{ position:relative; font:18px '黑体';}
+.gib a{font:18px '黑体';}
+.pd_navlist{ z-index:100; display:none; position:absolute; top:40px;left:-40px;}
+.pd_navlist ul li{font:18px '黑体'; background:#f6f6f6; width:166px;  height:40px; line-height:40px; padding-left:30px; margin-left:0;}
+
+.pd_navlist ul li a{ color:#555; margin-left:20px; text-align:left;}
+.pd_navlist ul li a img{ padding-right:10px;}
+.pd_navlist ul li:hover{ background:#8a8a8a; }
+.pd_navlist ul li a:hover{width:196px; height:40px;  color:#d90606; display:block;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----------------------------------footer-------------------------------------*/
+.footer{ width:1200px; height:auto; margin:0 auto;}
+
+.footer ul{ border-top:2px solid #e60040; padding-top:4px;}
+.footer ul li{ float:left; margin-right:160px;font-family:'微软雅黑'; font-size:12px;  line-height:24px;overflow:hidden;}
+.footer ul li a{ display:block;color:#000; text-decoration:none;}
+.footer ul li:last-child{margin-right:0px;}
+.footer ul li a:hover{ color:#c20000;}
+.footer ul li span{ font-family:'微软雅黑'; font-size:18px; color:#c20000;}
+.link{ text-align:center; margin-top:20px; font-family:'微软雅黑'; font-size:12px; color:#474747;}
+.link a{ text-decoration:none; color:#474747;}
+.link a:hover{color:#c20000;}
+

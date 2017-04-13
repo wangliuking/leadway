@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>提交订单</title>
+<#assign ctx=request.contextPath>
+ <#include "header_common.html"/> 
+<#import "/macros/header_macro.html" as head>
+<#import "/macros/nav_macro.html" as leadway_nav> 
+<#import "/macros/footer_macro.html" as leadway_footer>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/common.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/confirm_order.css">
+<script src="${ctx}/js/IE9.js"></script>
+<script src="${ctx}/js/jquery.js"></script>
+
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+
+</head>
+
+<body>
+<@head.header/>
+
+<!-- nav 导航区开始 -->
+<@leadway_nav.nav />
+
+<div class="content">
+  <div class="place">位置：会员中心→购物车</div>
+<form action="#" method="post">
+ <p class="address">选择地址<span><a href="#">管理收货地址</a></span></p>
+ <ul class="add" id="add">
+ 
+ <#list addressList as address>
+ <li><span>${address.city}</span>  <span>${address.addressDetail}</span>  <span>  （${address.name}收）电话：${address.phone}</span>
+ <input type="hidden" name="" value="${address.id}"/>
+ <a>修改本地址</a></li>
+ </#list>
+ <input type="hidden" name="" value="" id="selectAddress"/>
+</ul>
+<span><a href="${ctx}/customer/getAddressById">新增地址</a></span>
+ 
+ <div class="confirm">
+ <p>确认订单信息</p>
+ <div class="list">
+ 
+ <span>购买的宝贝</span>
+ <span>单价</span>
+ <span>数量</span>
+ <span>优惠价</span>
+ <span>小计</span>
+ </div>
+ 
+ <div class="message">
+ <#list goodsList as goods>
+ <div class="me1"><a href="pro_details.html"><img src="${ctx}/images/${goods.image}" width="82" height="82" class="f-l m-6"/></a>
+ <p class="eva"><a href="pro_details.html">${goods.title[0..8]}<br/>
+         <br/>
+          <span class="total"><span></span></span><br/><br/>
+          黑色 <br/>
+          </a><a href="#"><img src="${ctx}/images/4_pur_history_06.png" width="27" height="26"/></a><a href="#"><img src="${ctx}/images/4_pur_history_08.png" width="27" height="26"/></a><a href="#"><img src="${ctx}/images/4_pur_history_10.png" width="26" height="26"/></a></p>
+ <div class="clear"></div>
+ </div>                                            
+ <p class="me2">￥${goods.price}</p>
+ <p class="me3">${goods.buyNum}</p>
+ <p class="me4">￥${goods.favorablePrice}</p> 
+ <p class="me5">￥${goods.buyMoney}</p>
+ <div class="clear"></div>
+ </#list>
+ <div class="leave">
+ <label class="bady">宝贝留言：</label>
+ <textarea placeholder="选填对本次交易的说明（建议填写与卖家达成一致的说明）" style=" overflow: hidden;"></textarea>
+ <label class="transport">运送方式 </label>
+ <select name="save">
+ <option>快递 免邮</option>
+ <option>快递 自费</option>
+ </select>
+ <div class="clear"></div>
+ </div>
+ <span class="date">发货时间     卖家承诺订单在买家付款后，48小时内<span>发货</span></span>
+ 
+ <hr/>
+ <span class="total_c">合计    ¥ ${totalMoney}元  + 运费0.00元 </span>
+ <div class="clear"></div>
+ <span class="anonymous"><input type="checkbox"/>
+ <label>匿名购买</label></span>
+ <div class="clear"></div>
+
+ <div class="clear"></div>
+ 
+
+<a href="javascript:void(0)" id='dian'><input type="button"  value="提交订单" class="but"></a>
+<a href="javascript:void(0)" id='fan'><input type="button"  value="返回购物车" class="shopping"/></a>
+
+ </div>
+ 
+ 
+ <div class="clear"></div>
+ </div>
+ 
+</form>
+  </div>
+<!-- content -->
+	<@leadway_footer.footer/>
+</body>
+<script src="${ctx}/js/jquery-1.12.4.min.js"></script>
+<script src="${ctx}/js/index.js"></script>
+<script>
+$(function(){
+$("#add li").click(function(){
+
+	$("#add li").removeClass("select");
+	$(this).addClass("select");
+	var i = $(this).find("input").val();
+	$("#selectAddress").val(i);
+});
+ 
+$("#dian").click(function(){
+	if($("#selectAddress").val() == ""){
+		alert("请选择收货地址！");
+	}else{
+	window.location.href ="${ctx}/customer/saveOrder";
+	}
+});
+ $('#fan').click(function(){
+	window.location.href ="${ctx}/customer/showBuyCar";
+});
+ 
+});
+</script>
+	
+</html>

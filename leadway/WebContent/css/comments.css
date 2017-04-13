@@ -1,0 +1,20 @@
+/* CSS Document */
+
+.content{ width:1200px; height:auto; margin:10px auto 30px;}
+.place{ width:1200px; height:40px; font-family:'微软雅黑'; font-size:14px; color:#555; background:#c9c9c9; line-height:40px; text-align:center;}
+
+.evaluate{ height:500px; border:1px solid #a0a0a0;}
+.eva_ct{ width:570px; height:170px;}
+.eva{width:310px; margin-left:20px; display:inline-block; float:left; height:150px;  font-family:'微软雅黑'; font-size:14px; color:#3f3f3f;}
+.eva a{ color:#555;}
+.eva img{ float:right; margin:0 6px; margin-top:-8px;}
+.eva_b{ float:left; margin-top:100px; width:600px; height:230px;  font-family:'微软雅黑'; font-size:18px; color:#333;}
+.eva_b img{ margin-left:3px;}
+.eva_r{ width:580px; height:330px; float:right; margin-right:10px;}
+.eva_r form textarea{ resize:none; padding:6px 0 0 6px; width:570px; height:240px; border:1px solid #a0a0a0;}
+.eva_r form  button{ margin:30px 0 30px 230px; width:90px; height:30px; border:1px solid #a0a0a0; background:#d10007; color:#fff;}
+.eva_r form  input,label{ float:right; margin-top:40px; margin-right:2px;}
+
+/*.xing{ width:300px; height:20px; }
+.xing li{ dispaly:block; float:left; width:17px; height:16px; margin:0 5px; border:1px solid #000; background:url(../images/5_comments_03.png);}
+.satr{ background:url(../images/comments_03.png);}*/

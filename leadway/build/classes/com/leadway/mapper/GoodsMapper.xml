@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.leadway.mapper.GoodsMapper">
+	<sql id="findgoods">
+		select * from e_goods
+	</sql>
+	<!-- 首页商品列表的分页语句 -->
+	<select id="findByPageShop" resultMap="pageGoodsResultMap">
+		<trim prefix="select * " suffix="limit">
+			<include refid="pageSqlIndex"/>
+		</trim>
+		#{pageModel.startRow},#{pageModel.pageSize}
+	</select>
+	
+	<!-- 统计首页商品需要分页的行数 -->
+	<select id="countIndex" resultType="int">
+		select count(*) <include refid="pageSqlIndex"/>
+	</select>
+	
+	<!-- 首页商品分页sql基本代码 -->
+	<sql id="pageSqlIndex">
+		from e_goods
+		<if test="goods!=null">
+			<where>
+				<if test="goods.e !=null">
+					TYPE_CODE like concat(#{goods.e},'%')
+				</if>
+				<if test="goods.title !=null">
+					and title like concat('%',#{goods.title},'%')
+				</if>
+			</where>
+		</if>
+		order by grounding_date desc 
+	</sql>
+	
+	
+	<!-- 分页sql基本代码 -->
+	<sql id="pageSql">
+		from e_goods
+		<if test="goods!=null">
+			<where>
+				<if test="goods.title !=null and goods.goodsType.code ==null">
+					title like concat('%',#{goods.title},'%')
+				</if>
+				<if test="goods.goodsType.code !=null and goods.title ==null">
+					TYPE_CODE like concat(#{goods.goodsType.code},'%')
+				</if>
+				<if test="goods.goodsType.code !=null and goods.title !=null">
+					title like concat('%',#{goods.title},'%') and TYPE_CODE like concat(#{goods.goodsType.code},'%')
+				</if>
+			</where>
+		</if>
+		order by id asc 
+	</sql>
+	
+	<!-- 头部模糊查询具体的分页语句 -->
+	<select id="findByPageHead" resultMap="pageGoodsResultMap">
+		<trim prefix="select * " suffix="limit">
+			<include refid="pageSql1"/>
+		</trim>
+		#{pageModel.startRow},#{pageModel.pageSize}
+	</select>
+	
+	<!-- 具体的分页语句 -->
+	<select id="findByPage" resultMap="pageGoodsResultMap">
+		<trim prefix="select * " suffix="limit">
+			<include refid="pageSql"/>
+		</trim>
+		#{pageModel.startRow},#{pageModel.pageSize}
+	</select>
+	
+	<!-- 具体的分页语句  当goodstype为空时-->
+	<select id="findByPage1" resultMap="pageGoodsResultMap">
+		<trim prefix="select * " suffix="limit">
+			<include refid="pageSql1"/>
+		</trim>
+		#{pageModel.startRow},#{pageModel.pageSize}
+	</select>
+	
+	<!-- 分页sql基本代码 当goodstype为空时-->
+	<sql id="pageSql1">
+		from e_goods
+		<if test="goods!=null">
+			<where>
+				<if test="goods.title !=null and goods.title !=''">
+					title like concat('%',#{goods.title},'%')
+				</if>
+			</where>
+		</if>
+		order by id asc 
+	</sql>
+	
+	<!-- 统计需要分页的行数 当goodstype为空时-->
+	<select id="count1" resultType="int">
+		select count(*) <include refid="pageSql1"/>
+	</select>
+	
+	
+	<!-- 统计需要分页的行数 -->
+	<select id="count" resultType="int">
+		select count(*) <include refid="pageSql"/>
+	</select>
+	
+	<!-- 统计首页头部查询需要分页的行数 -->
+	<select id="countHead" resultType="int">
+		select count(*) <include refid="pageSql1"/>
+	</select>
+	
+	
+	<!-- 根据商品id查询商品 -->
+	<select id="getGoodsById" resultMap="pageGoodsResultMap">
+		<include refid="findgoods"/>
+		where id = #{id}
+	</select>
+	
+	<!-- 根据商品类型查询商品 -->
+	<select id="getGoodsByCode" resultMap="baseGoodsResultMap">
+		<include refid="findgoods"/>
+		where type_code like concat('',#{code},'%')
+	</select>
+	
+	<!-- 查询热卖商品 -->
+	<select id="getGoodsSale" resultMap="baseGoodsResultMap">
+		<include refid="findgoods"/>
+		where OTHER="热卖商品" limit 0,6
+	</select>
+	
+	<!-- 查询夏日必备 -->
+	<select id="getGoodsSummer" resultMap="baseGoodsResultMap">
+		<include refid="findgoods"/>
+		where OTHER="夏日必备" limit 0,4
+	</select>
+	
+	<!-- 新增商品 -->
+	<insert id="saveGoods">
+		insert into e_goods(
+			TITLE,BRAND_NAME,PRICE,FAVORABLE_PRICE,
+			GROUNDING_DATE,STORAGE,IMAGE,DESCRIPTION,COLOR,SERVICE,OTHER,
+			TYPE_CODE,CREATE_DATE,IMG_1,IMG_2,IMG_3,IMG_DETAIL,SMALL,MIDDLE,BIG
+		) values(
+			#{title},#{brandName},#{price},#{favorablePrice},
+			#{groundingDate},#{storage},#{image},
+			#{description},#{color},#{service},#{other},#{goodsType.code},#{createDate},
+			#{img1},#{img2},#{img3},#{imgDetail},#{small},#{middle},#{big}
+		)
+	</insert>
+	
+	<!-- 删除商品-->
+	<delete id="deleteGoods">
+		delete from e_goods where id=#{id}
+	</delete>
+	
+	<!-- 更新商品-->
+	<update id="updateGoods">
+		update e_goods set TITLE=#{title},BRAND_NAME=#{brandName},PRICE=#{price},FAVORABLE_PRICE=#{favorablePrice},
+		STORAGE=#{storage},IMAGE=#{image},DESCRIPTION=#{description},COLOR=#{color},SERVICE=#{service},OTHER=#{other},
+		TYPE_CODE=#{goodsType.code},CREATE_DATE=SYSDATE(),GROUNDING_DATE=#{d},
+		IMG_1=#{img1},IMG_2=#{img2},IMG_3=#{img3},IMG_DETAIL=#{imgDetail},SMALL=#{small},MIDDLE=#{middle},BIG=#{big} where id=#{id}
+	</update>
+	
+	
+	
+	<!-- 定义ResultMap -->
+	<resultMap id="baseGoodsResultMap" type="Goods" autoMapping="true">
+		<!-- 定义列和java对象属性的对应关系 -->
+		<result column="BRAND_NAME" property="brandName"/>
+		<result column="FAVORABLE_PRICE" property="favorablePrice"/>
+		<result column="GROUNDING_DATE" property="groundingDate"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="IMG_1" property="img1"/>
+		<result column="IMG_2" property="img2"/>
+		<result column="IMG_3" property="img3"/>
+		<result column="IMG_DETAIL" property="imgDetail"/>
+	</resultMap>
+	
+	<resultMap id="pageGoodsResultMap"  type="Goods" extends="baseGoodsResultMap">
+		<!-- 一对多的关联关系配置（一个商品类型对应多个商品） -->
+		<association property="goodsType" column="TYPE_CODE" javaType="GoodsType" 
+		select="com.leadway.mapper.GoodsTypeMapper.findGoodsTypeByCode"/>		
+	</resultMap>
+	
+</mapper>

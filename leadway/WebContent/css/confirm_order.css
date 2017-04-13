@@ -1,0 +1,69 @@
+/* CSS Document */
+.content{ width:1200px; height:auto; margin:10px auto 30px;font-family:'微软雅黑';}
+.address{ width:1200px;  font-size:18px; color:#555; margin-top:20px; border-bottom:1px solid #d70000;}
+.address span a,.add li a{ float:right; font-size:14px; color:#d70000; }
+.add{ margin-top:10px;}
+.add li{ padding-left:40px; line-height:30px; list-style:url(../images/9_confirm_order_06.png) inside; height:30px; margin-bottom:6px; font-size:14px; color:#555;}
+
+.select{ border:1px solid #a3a3a3; background:#f2f2f2;font-size:18px; list-style:url(../images/9_confirm_order_03.png) inside !important; }
+.add li:nth-child(4){ list-style:none; padding-left:60px;}
+.add li:nth-child(4) a{ float:none;}
+.add li span{ margin:0 6px;}
+
+.tacitly{ color:#b7b7b7;}
+
+.confirm{ width:1200px; height:auto; margin-top:30px;}
+.confirm p{ font-size:18px; color:#5c5c5c; }
+.list{ width:1200px; height:30px; line-height:30px; font-size:14px; border-bottom:1px solid #d70000;}
+.list span{ margin:0 66px;}
+.list span:nth-child(1){ margin:0 232px;}
+
+.message{ width:1200px; height:100px;}
+.me1,.me2,.me3,.me4{ float:left; display:inline-block; height:100px; border-right:1px solid #d70000; }
+.me2,.me3,.me4,.me5{ line-height:100px; text-align:center; font-size:18px; color:#3f3f3f;}
+.me1{ width:534px;}
+.me2{ width:172px;}
+.me3{ width:146px;}
+.me4{ width:198px;}
+
+.me4 select{ font-size:16px; color:#3f3f3f !important; letter-spacing:3px;}
+.me5{ width:142px; float:left; display:inline-block; color:#c60000 !important; }
+
+
+.message .eva{width:350px; margin-left:20px; display:inline-block; float:left; height:100px;  font-family:'黑体'; font-size:12px; color:#3f3f3f; margin-top:6px;}
+.eva a{ color:#555;}
+.eva img{ float:right; margin:0 6px; margin-top:-8px;}
+
+.total{ float:right; font-size:14px; color:#3f3f3f; }
+.total span{ color:#a8a8a8;}
+.leave{ width:1200px; height:40px; font-size:14px; color:#5c5c5c; margin-top:30px; border-bottom:1px solid #d70000; line-height:40px;}
+.bady{ float:left; height:30px; line-height:30px;}
+.transport{ margin-left:180px; display:inline-block;}
+.leave textarea{ width:370px; height:30px; border:1px solid #959595; line-height:30px; resize:none; text-indent:0.5em;}
+.leave span{ color:#ce0000; float:right; margin-right:70px;}
+.date{ float:right; display:block; height:40px; line-height:40px; margin-right:304px;}
+.date span{ color:#c60000;}
+hr{ background:#d70000; border:0; height:1px; margin-top:40px;}
+.total_c{ float:right; height:40px; line-height:40px; display:block; font-size:14px;}
+.total_c span{ font-size:18px; color:#ce0000;}
+
+.anonymous{ float:right; display:block; height:40px; line-height:20px;}
+
+.right{ width:360px; height:160px; border:1px solid #959595; float:right;}
+.right ul li{ text-align:right; line-height:50px; font-size:12px; margin-right:6px;}
+.right ul li:nth-child(1){ font-size:14px;}
+.right ul li:nth-child(1) span{ font-size:24px; color:#ce0000; margin-right:20px;}
+.right ul li span{ font-size:18px;}
+
+
+.but{ float:right; margin-left:60px; margin-top:10px; width:110px; height:30px; border:1px solid #959595; font-size:18px; background:#e90000; color:#fff;cursor:pointer;}
+
+.shopping{float:right; margin-left:60px; margin-top:10px; width:110px; height:30px; border:1px solid #959595; font-size:18px; color:#666;cursor:pointer;}
+
+
+
+
+
+
+
+ 

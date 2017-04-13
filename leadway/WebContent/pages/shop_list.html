@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>外部改装</title>
+<#assign ctx=request.contextPath> <#include
+"header_common.html"/> <#import "/macros/header_macro.html" as head>
+<#import "/macros/nav_macro.html" as leadway_nav> <#import
+"/macros/footer_macro.html" as leadway_footer>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/common.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/shop.css">
+<script src="${ctx}/js/jquery.js"></script>
+<script src="${ctx}/js/IE9.js"></script>
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+
+</head>
+
+<body>
+
+<@head.header/>
+
+<!-- nav 导航区开始 -->
+<@leadway_nav.nav />
+
+<div class="content">
+<div class="ct_left">
+<ul>
+<li><a href="pro_details.html"><span>热卖精品</span><img src="${ctx}/images/2_shop_18.jpg" width="192" height="251" alt="pic" title="pic"/></a></li>
+
+<li><a href="pro_details.html"><img src="${ctx}/images/2_shop_23.jpg" width="192" height="299" alt="pic" title="pic"/></a></li>
+
+</ul>
+
+
+
+
+</div>
+
+<div class="ct_right">
+<ul class="ct_right_top">
+<li>位置：全部商品→${indexName.name}<#if indexName1??>→${indexName1.name}</#if></li>
+<li>已选要求:<span style="color:blue;">${indexName.name}</span> <#if indexName1??><span style="color:green;">${indexName1.name}</span><#else>待选</#if></li>
+<li>详细搜索：   输入名称  
+<form class="test" action="${ctx}/customer/goods/goodsShoppingByTitle?ID=${indexName.code}&ID1=<#if indexName1??>${indexName1.code}<#else>1</#if>" method="post">
+<input type="text" name="title" id="title"/>
+
+<button id="btn">搜名称</button>
+
+</form>
+
+</li>
+<li>二级选择：
+<#if maxToMin??>
+<#list maxToMin as m>
+<a href="${ctx}/customer/goods/goodsShopping?ID=${m.code}" style="color:green;">${m.name}</a>
+</#list>
+</#if>  
+</li>
+</ul>
+<ul class="ct_right_buttom">
+<#if goodsList??>
+<#list goodsList as goods>
+<li><a href="${ctx}/customer/goods/goodsDetail?id=${goods.id}"><img src="${ctx}/images/${goods.image}" width="233" height="298" alt="pic" title="pic"/>${goods.title[0..8]} <span color="red">特惠价： ${goods.price}￥</span></a></li>
+</#list>
+</#if>  
+</ul>
+<#if pageModel??>
+<#if pageModel.recordCount??>
+	<!-- 分页标签-->
+	<div id="pagerInfo"
+		style="margin: 5px 0px; text-align: center; color: blue">
+		共${pageModel.recordCount}条,
+		${((pageModel.recordCount+pageModel.pageSize
+		-1)/pageModel.pageSize)?int}页</div>
+	<div id="pager"><#import "common/pager.html" as page>
+		<@page.pager pageIndex=pageModel.pageIndex pageSize=pageModel.pageSize
+		recordCount=pageModel.recordCount		
+		toURL="${ctx}/customer/goods/goodsShopping"/>
+		</div>
+	</#if>
+</#if>
+
+
+</div>
+
+
+<div class="clear"></div>
+</div>
+
+
+	<!-- content -->
+	<@leadway_footer.footer/>
+
+</body>
+<script src="${ctx}/js/jquery-1.12.4.min.js"></script>
+<script src="${ctx}/js/index.js"></script>
+<script>
+
+</script>
+</html>

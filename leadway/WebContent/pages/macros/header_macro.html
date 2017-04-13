@@ -1,0 +1,59 @@
+<#assign ctx=request.contextPath>
+<#macro header>
+	<!-- header 头部 -->
+	<div class="domain ">
+<div><span>欢迎光临～王柳凯的商城</span>   
+<a href="${ctx}/customer/index">我的小店</a>
+<#if session_user??>
+<a href="${ctx}/customer/orderDetails">我的订单丨</a>
+<#else>
+<a href="${ctx}/customer/loginPage">订单查看丨</a>
+</#if>
+<a href="${ctx}/customer/showBuyCar" class="shopingcart"><font id="totalNum" color="red">0</font></a>
+<a href="${ctx}/customer/showBuyCar" id="showBuyCar">我的购物车</a>
+<#if session_user??>
+<a href="${ctx}/customer/getUserById">会员中心丨</a>
+<#else>
+<a href="${ctx}/customer/loginPage">会员中心丨</a>
+</#if>
+<#if session_user??>
+<a href="${ctx}/customer/logout">注销</a>
+<a><font color="red">${session_user.realname}</font> ，欢迎您!</a>
+<#else>
+<a href="${ctx}/customer/registerPage">免费注册</a>
+<a href="${ctx}/customer/loginPage">登录</a>
+</#if>
+</div>
+</div>
+<div class="header">
+<a href="${ctx}/customer/index"><img src="${ctx}/images/logo.gif" width="184" height="120" alt="logo" title="logo" class="f-l"/></a>
+<div class="search f-r">
+<form action="${ctx}/customer/goods/GoodsByTitle" method="post">
+<input type="text" name="title" id="title"/>
+<button>搜索</button>
+</form>
+
+</div>
+</div>
+<script>
+	    //异步获取购物车中商品的数量
+		var refreshShopCarNum = function(){
+			var url ="${ctx}/customer/loadAjaxShopCarNum";
+			$.post(url,function(data){
+				if(data.status == 0){
+					$("#totalNum").text(data.totalNum);	
+				}	
+		   },"json");
+		}
+	
+		//异步获取购物车中商品的数量
+		$(function(){
+			refreshShopCarNum();
+		})
+	
+	</script>		
+	
+	
+
+	<!-- header end-->
+</#macro>

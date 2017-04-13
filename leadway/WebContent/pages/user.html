@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>会员中心</title>
+<#assign ctx=request.contextPath>
+<#assign c="file1">
+<#assign d="file2">
+<#assign e="file3">
+<#assign f="file4">
+<#assign g="file5">
+ <#include "header_common.html"/> 
+<#import "/macros/header_macro.html" as head>
+<#import "/macros/nav_macro.html" as leadway_nav> 
+<#import "/macros/footer_macro.html" as leadway_footer>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/common.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/user.css">
+<script src="${ctx}/js/jquery.js"></script>
+<script src="${ctx}/js/IE9.js"></script>
+<script type="text/javascript" src="${ctx}/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="${ctx}/js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+function ajaxFileUpload(name) {
+    $.ajaxFileUpload
+    (
+        {
+            url: '${ctx}/admin/goods/imgUpload', //用于文件上传的服务器端请求地址
+            secureuri: false, //是否需要安全协议，一般设置为false
+            fileElementId: name, //文件上传域的ID
+            dataType: 'HTML', //返回值类型 一般设置为json
+            success: function (data, status)  //服务器成功响应处理函数
+            {
+                $("#img_"+name).attr("src", "${ctx}"+data);
+                $("#input_"+name).attr("value", data);
+                if (typeof (data.error) != 'undefined') {
+                    if (data.error != '') {
+                        alert(data.error);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            },
+            error: function (data, status, e)//服务器响应失败处理函数
+            {
+                alert(e);
+            }
+        }
+    );
+    return false;
+}
+
+/** 文档加载完 */
+$(function(){
+
+	var realname = $("#realname");
+	var birthday = $("#birthday");
+	var city = $("#city");
+	var email = $("#email");
+	var phone = $("#phone");
+	var address = $("#address");
+	var tips = "";
+
+
+
+});
+
+var change = function(){
+	$(".checkimg").prop("src", "${ctx}/verify.do?"+Math.random());
+};
+</script>
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+</head>
+
+<body>
+<@head.header/>
+
+<!-- nav 导航区开始 -->
+<@leadway_nav.nav />
+
+<div class="content">
+  <div class="place">位置：首页→会员中心</div>
+<form action="${ctx}/customer/updateUser" method="post" class="fr-re" id="update">
+ <div class="member">
+ <div class="me_left">
+ <ul>
+ <li>账号管理</li>
+ <li><a href="${ctx}/customer/getUserById">个人资料</a></li>
+ <li><a href="${ctx}/customer/orderDetails">个人交易信息</a></li>
+ <li><a href="${ctx}/customer/getAddressById">收货地址</a></li>
+ </ul>
+ 
+ 
+ </div>
+ <div class="me_right">
+ 
+ 
+ <ul class="data">
+ <li><a href="#">基本资料</a></li>
+</ul>
+
+ <div class="r_list">个人资料</div>
+ <div class="clear"></div>
+ <div class="r_buttom" style="height:auto">
+
+
+<#if users??>
+<input type="hidden" name="id" value="${users.id}" />
+ <label>真实姓名:</label>
+<input id="realname" name="realname" type="text" placeholder="输入真实姓名" value="${users.realname}"/>
+  <div class="clear"></div>
+
+ <label>性别:</label>
+ <input type="radio" name="sex" value="1" class="rad" checked/>
+ 男
+ <input type="radio" name="sex" value="2" class="rad"/>
+ 女
+  <div class="clear"></div>
+
+ <label>生日:</label>
+<input  class="Wdate" id="birthday"  name="birthday" 
+							type="text" placeholder="点击选择日期" 
+							onfocus="WdatePicker({lang:'zh-cn',fmt:'yyyy-MM-dd'});" value="${users.birthday?string('yyyy-MM-dd')}">
+  <div class="clear"></div>
+
+ <label>城市:</label>
+<input id="city" name="city" type="text" placeholder="点击选择城市" value="${users.city}"/>
+  <div class="clear"></div>
+  
+<label>Email</label>
+<input id="email" name="email" type="text" placeholder="请输入您的邮箱地址" value="${users.email}"/>
+ <div class="clear"></div>
+ 
+<label>手机号</label>
+<input id="phone" name="phone" type="text" placeholder="请输入您的长用手机号" value="${users.phone}"/>
+<div class="clear"></div>
+  
+<label>地址</label>
+<input id="address" name="address" type="text" placeholder="请输入您的详细地址" value="${users.address}"/>
+<div class="clear"></div>
+</#if>
+<input type="submit" id="updateUser" class="submit" value="保存">
+</form>
+
+
+ </div>
+
+ </div>
+
+  <div class="clear"></div>
+
+ </div>
+ 
+
+  </div>
+<!-- content -->
+	<@leadway_footer.footer/>
+</body>
+<script src="${ctx}/js/index.js"></script>
+</html>

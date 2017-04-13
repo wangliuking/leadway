@@ -1,0 +1,37 @@
+/* CSS Document */
+
+/*----------------------------------content-------------------------------------*/
+.content{ width:1200px; height:auto; margin:0 auto;}
+.ct_left{ float:left; width:196px; height:auto;}
+.ct_left ul{ margin-top:370px;}
+.ct_left ul li span{ display:block; width:194px; height:48px; text-align:center; line-height:48px; border-bottom:2px solid #959595; font-family:'微软雅黑'; font-size:18px;  color:#d70000;}
+.ct_left ul li{ border:2px solid #959595; margin-bottom:12px;}
+.ct_left ul li a:hover{ text-decoration:none;}
+
+.ct_right{ float:right; width:994px; height:auto; padding-bottom:50px;}
+.ct_right_top{ border:2px solid #a0a0a0; margin-top:10px;}
+.ct_right_top li{ width:992px; height:40px; border-top:2px solid #a0a0a0; line-height:40px;font-family:'微软雅黑'; font-size:12px; color:#555;}
+
+.ct_right_top li:nth-child(1){font-family:'黑体'; font-size:14px; color:#555; background:#c9c9c9; border-top:0; text-align:center;}
+.ct_right_top li:nth-child(2){ border-top:0;}
+
+.ct_right_top li form{ height:20px; line-height:20px; display:inline-block; border:2px solid #313131;}
+.ct_right_top li form input{ width:100px; padding-left:6px;}
+.ct_right_top li form button{ border-left:2px solid #313131; height:20px; width:46px; background:0;}
+.ct_right_top li a{ margin-right:10px; color:#555; border:1px solid #fff; padding:1px;}
+.bg{ border:1px solid #f00 !important; padding:1px;}
+.ct_right_top li a:hover{ text-decoration:none;}
+.ct_right_top li a img{ text-align:center;}
+
+.ct_right_buttom{height:auto;}
+.ct_right_buttom li{ float:left; width:233px; text-align:center; line-height:24px; margin: 20px 18px 20px 0;}
+.ct_right_buttom li img{ border:1px solid #dcdcdc;  }
+.ct_right_buttom li a{ font-family:'微软雅黑'; font-size:12px; color:#555;}
+.ct_right_buttom li a span{ color:#a90303;}
+.ct_right_buttom li a:hover{ text-decoration:none; color:#cc0101;}
+
+.ct_right_buttom li:nth-child(4),.ct_right_buttom li:nth-child(8),.ct_right_buttom li:nth-child(12),.ct_right_buttom li:nth-child(16){ margin-right:0;}
+
+.page{ margin:30px auto; width:400px;}
+.page a{ padding:0px 5px;border:1px solid #fff; font-family:'微软雅黑'; font-size:14px; color:#555;}
+.page a:hover{ text-decoration:none; border:1px solid #999;}

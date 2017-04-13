@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.leadway.mapper.GoodsTypeMapper">
+	<sql id="findgoodstype">
+		select * from e_goods_type
+	</sql>
+	<!-- 分页sql基本代码 -->
+	<sql id="pageSql">
+		from e_goods_type
+		<if test="goodstype != null">
+			<where>
+				<if test="goodstype.code != null &amp;&amp;goodstype.code != ''">
+					CODE like concat('%',#{goodstype.code},'%')
+				</if>
+			</where>
+		</if>
+		order by code asc 
+	</sql>
+	<!-- 具体的分页语句 -->
+	<select id="getGoodsTypeListByPage" resultType="GoodsType">
+		<trim prefix="select * " suffix="limit">
+			<include refid="pageSql"/>
+		</trim>
+		#{pageModel.startRow},#{pageModel.pageSize}
+	</select>
+	<!-- 统计需要分页的行数 -->
+	<select id="count" resultType="int">
+		select count(*) <include refid="pageSql"/>
+	</select>
+	
+	<!-- 获取商品类型 -->
+	<select id="getGoodsTypeList" resultType="GoodsType">
+		<include refid="findgoodstype"/>
+		order by code asc
+	</select>
+	
+	<!-- 根据code查询商品类型 -->
+	<select id="getIndexPageType" resultType="GoodsType">
+		<include refid="findgoodstype"/>
+		where code = #{str}
+	</select>
+	
+	<!-- 根据当前页的ID查询商品大类型 -->
+	<select id="findGoodsTypeByCode" resultType="GoodsType">
+		<include refid="findgoodstype"/>
+		where code = #{code}
+	</select>
+	
+	<!-- 查询大类型 -->
+	<select id="getMaxType" resultType="map">
+		select code,name from e_goods_type where length(code) = 4 order by code asc
+	</select>
+	
+	<!-- 查询大类型  进行nav部分显示-->
+	<select id="getMaxType1" resultType="map">
+		select code,name from e_goods_type where length(code) = 4 order by code asc limit 0,5
+	</select>
+	
+	<!-- 查询大类型  进行nav下拉栏显示-->
+	<select id="getMaxTypeAll" resultType="map">
+		select code,name from e_goods_type where length(code) = 4 order by code asc
+	</select>
+	
+	<!-- 查询小类型 -->
+	<select id ="getMinType" resultType="map">
+		select code,name from e_goods_type where length(code) = 8 and code like concat('',#{code},'%') order by code asc
+	</select>
+	
+	<!-- 查询当前大类型下的所有小类型 -->
+	<select id ="getMaxToMinType" resultType="map">
+		select code,name from e_goods_type where length(code) = 8 and code like concat('',#{str},'%') order by code asc
+	</select>
+	
+	<!-- 商品类型删除操作-->
+	<delete id="deleteGoodsType">
+		delete from e_goods_type where code=#{code}
+	</delete>
+	<!-- 商品类型更新操作 -->
+	<update id="updateGoodsType">
+		update e_goods_type set name=#{name}, remark=#{remark} where code=#{code}
+	</update>
+</mapper>

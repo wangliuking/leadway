@@ -1,0 +1,74 @@
+/* CSS Document */
+
+/*-------------------------------banner------------------------------------*/
+.banner { width: 100%; height: 465px; position:relative; *margin-bottom:80px; }
+.pic li{ width:100%; overflow:hidden; position:absolute;}
+.pic li img{ width:1920px; height:465px; position:relative; left:50%; margin-left:-960px;}
+
+
+.num{ /*width:100%;*/ height:30px;}
+.num li{ width:30px; height:30px; float:left; margin:0 8px; 
+
+position:relative;
+background:url(../images/yd.png) no-repeat;
+left:45%;
+top:430px;
+z-index:88; /*必须要用的属性*/
+behavior: url(ie-css3.htc); /*必须要用的属性*/
+}  
+
+.active{ background:url(../images/yd1.png) no-repeat !important;}
+
+/*-------------------------------content------------------------------------*/
+.content{ width:1200px; height:auto; margin:0 auto;}
+.mr-72{ margin-top:72px; display:block; font-family:'微软雅黑'; font-size:24px; border-bottom:2px solid #e60040; padding-bottom:10px;}
+
+.new{ height:716px;}
+.lu{ width:613px; float:left;}
+.lu li{ float:left; margin-right:25px; margin-top:34px; position:relative;}
+
+.bg{ display:none; width:280px; height:300px;  position:absolute; top:0; left:0; background:#000; background:rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/filter:Alpha(opacity=50);/*实现IE背景透明*/display:none;}
+.bg a{ position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值，保证字体颜色不透明 */ width:216px; height:220px; display:inline-block; margin:20px 38px; font-family:'微软雅黑'; font-size:24px; line-height:48px;  color:#fff;}
+
+
+
+.new-r{ width:587px; float:right; position:relative;}
+.new-r img{ margin-top:34px;}
+.new-r div{ display:none; width:587px; height:410px; background:#000; background:rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/filter:Alpha(opacity=50);/*实现IE背景透明*/ position:absolute; top:34px;}
+.new-r div a{ position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值，保证字体颜色不透明 */ width:440px; height:176px; display:inline-block; margin:116px 76px; font-family:'微软雅黑'; font-size:30px; line-height:48px; color:#fff;}
+
+.new-r p{ margin-top:64px; text-align:center;font-family:'微软雅黑'; font-size:14px; line-height:30px; color:#5d5d5d;}
+.new-r p span{ display:block; font-family:'微软雅黑'; font-size:18px; color:#434343;}
+
+.moren{ display:none; width:280px; height:289px; position:absolute; top:0; left:0; background:#000; background:rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/filter:Alpha(opacity=50);/*实现IE背景透明*/}
+.moren a{ position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值，保证字体颜色不透明 */ width:216px; height:220px; display:inline-block; margin:20px 38px; font-family:'微软雅黑'; font-size:24px; line-height:48px;  color:#fff;}
+
+#two{ width:588px;}
+#two a{  width:440px; height:176px; display:inline-block; margin:80px 76px;}
+
+.hot{ height:700px; }
+.left{ width:284px; height:616px; float:left; position:relative; margin-top:34px;}
+.left div{ display:none; width:284px; height:616px;background:#000; background:rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/filter:Alpha(opacity=50);/*实现IE背景透明*/  position:absolute; top:0;}
+.left div a{ position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值，保证字体颜色不透明 */ width:216px; height:220px; display:inline-block; margin:170px 38px; font-family:'微软雅黑'; font-size:24px; line-height:48px;  color:#fff;}
+
+.hot ul{ float:left; width:916px;}
+.hot ul li{ position:relative; margin-left:23px; margin-top:34px; float:left;}
+
+
+.summer{ height:780px;}
+.summer ul li{ margin-top:34px; float:left; margin-right:25px; *margin-right:25px; position:relative;}
+.summer ul li:nth-child(2),.summer ul li:nth-child(4){margin-right:0;}
+
+.summer ul div{ display:none; width:587px; height:290px; background:rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字.不透明*/filter:Alpha(opacity=50);background:#000;/*实现IE背景透明*/ position:absolute; top:0;}
+
+.summer ul div a{ position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值，保证字体颜色不透明 */ width:530px; height:130px; display:inline-block; 
+  margin:80px 34px; font-family:'微软雅黑'; font-size:30px; line-height:48px;  color:#fff;}
+.summer ul div a span{ color:#f00;}
+
+
+
+
+
+
+
+
